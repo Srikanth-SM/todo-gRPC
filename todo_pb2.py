@@ -17,9 +17,9 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='todo.proto',
   package='',
-  syntax='proto2',
+  syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\ntodo.proto\"\x8d\x01\n\x04Todo\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\ttodo_text\x18\x02 \x01(\t\x12\x12\n\ncreated_at\x18\x03 \x01(\x03\x12\x1c\n\x06status\x18\x04 \x01(\x0e\x32\x0c.Todo.Status\"4\n\x06Status\x12\x0e\n\nINPROGRESS\x10\x00\x12\r\n\tCOMPLETED\x10\x01\x12\x0b\n\x07\x43REATED\x10\x02\"\x1d\n\x05Todos\x12\x14\n\x05todos\x18\x01 \x03(\x0b\x32\x05.Todo\"\x0e\n\x0c\x45mptyRequest2\x8c\x01\n\x0bTodoService\x12\x1c\n\nCreateTodo\x12\x05.Todo\x1a\x05.Todo\"\x00\x12\x1c\n\nUpdateTodo\x12\x05.Todo\x1a\x05.Todo\"\x00\x12&\n\x0bGetAllTodos\x12\r.EmptyRequest\x1a\x06.Todos\"\x00\x12\x19\n\x07GetTodo\x12\x05.Todo\x1a\x05.Todo\"\x00')
+  serialized_pb=_b('\n\ntodo.proto\"\x8d\x01\n\x04Todo\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x11\n\ttodo_text\x18\x02 \x01(\t\x12\x12\n\ncreated_at\x18\x03 \x01(\x03\x12\x1c\n\x06status\x18\x04 \x01(\x0e\x32\x0c.Todo.Status\"4\n\x06Status\x12\x0e\n\nINPROGRESS\x10\x00\x12\r\n\tCOMPLETED\x10\x01\x12\x0b\n\x07\x43REATED\x10\x02\"\x1d\n\x05Todos\x12\x14\n\x05todos\x18\x01 \x03(\x0b\x32\x05.Todo\"\x0e\n\x0c\x45mptyRequest2\xb2\x01\n\x0bTodoService\x12\x1c\n\nCreateTodo\x12\x05.Todo\x1a\x05.Todo\"\x00\x12\x1c\n\nUpdateTodo\x12\x05.Todo\x1a\x05.Todo\"\x00\x12&\n\x0bGetAllTodos\x12\r.EmptyRequest\x1a\x06.Todos\"\x00\x12\x19\n\x07GetTodo\x12\x05.Todo\x1a\x05.Todo\"\x00\x12$\n\nDeleteTodo\x12\x05.Todo\x1a\r.EmptyRequest\"\x00\x62\x06proto3')
 )
 
 
@@ -95,7 +95,7 @@ _TODO = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
@@ -126,7 +126,7 @@ _TODOS = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
@@ -150,7 +150,7 @@ _EMPTYREQUEST = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
@@ -196,7 +196,7 @@ _TODOSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   serialized_start=206,
-  serialized_end=346,
+  serialized_end=384,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateTodo',
@@ -232,6 +232,15 @@ _TODOSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_TODO,
     output_type=_TODO,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='DeleteTodo',
+    full_name='TodoService.DeleteTodo',
+    index=4,
+    containing_service=None,
+    input_type=_TODO,
+    output_type=_EMPTYREQUEST,
     serialized_options=None,
   ),
 ])

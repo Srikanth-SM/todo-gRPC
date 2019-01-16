@@ -1,4 +1,4 @@
-syntax = 'proto2';
+syntax = 'proto3';
 service TodoService {
     
     rpc CreateTodo (Todo) returns (Todo) {};
@@ -8,19 +8,21 @@ service TodoService {
     rpc GetAllTodos (EmptyRequest) returns (Todos){};
     
     rpc GetTodo (Todo) returns (Todo) {};
+
+    rpc DeleteTodo(Todo)returns (EmptyRequest) {};
   }
   
   
 message Todo {
-  optional int32 id = 1;
-  optional string todo_text = 2;
-  optional int64 created_at = 3;
+  int32 id = 1;
+  string todo_text = 2;
+  int64 created_at = 3;
   enum Status{
     INPROGRESS = 0;
     COMPLETED = 1;
     CREATED = 2;
   };
-  optional Status status = 4;
+  Status status = 4;
 }
 
 

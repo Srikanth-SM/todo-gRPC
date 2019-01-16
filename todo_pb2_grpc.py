@@ -34,6 +34,11 @@ class TodoServiceStub(object):
         request_serializer=todo__pb2.Todo.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
+    self.DeleteTodo = channel.unary_unary(
+        '/TodoService/DeleteTodo',
+        request_serializer=todo__pb2.Todo.SerializeToString,
+        response_deserializer=todo__pb2.EmptyRequest.FromString,
+        )
 
 
 class TodoServiceServicer(object):
@@ -68,6 +73,13 @@ class TodoServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def DeleteTodo(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_TodoServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -90,6 +102,11 @@ def add_TodoServiceServicer_to_server(servicer, server):
           servicer.GetTodo,
           request_deserializer=todo__pb2.Todo.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
+      ),
+      'DeleteTodo': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteTodo,
+          request_deserializer=todo__pb2.Todo.FromString,
+          response_serializer=todo__pb2.EmptyRequest.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

@@ -98,6 +98,23 @@ class TodoServiceServicer(TodoServiceServicer):
         except Exception as e:
             print("Exception occured,{0}".format(e.__str__()))
             return Todo()
+    
+    
+    @log_request
+    def DeleteTodo(self,request,context):
+        try:
+            if not request.id:
+                raise ValueError("id must be present")
+            todo = session.query(Todo).filter(Todo.id==request.id)
+            todo.delete(synchronize_session=False)
+            logging.info("hai")
+            logging.info(todo)
+            session.commit()
+            return todo_pb2.EmptyRequest()
+        except Exception as e:
+            print("Exception occured,{0}".format(e.__str__()))
+            return Todo()
+
 
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
