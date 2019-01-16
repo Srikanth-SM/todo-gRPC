@@ -1,0 +1,38 @@
+syntax = 'proto2';
+service TodoService {
+    
+    rpc CreateTodo (Todo) returns (Todo) {};
+    
+    rpc UpdateTodo (Todo) returns (Todo) {};
+
+    rpc GetAllTodos (EmptyRequest) returns (Todos){};
+    
+    rpc GetTodo (GetTodoId) returns (Todo) {};
+  }
+  
+  
+message Todo {
+  required int32 id = 1;
+  required string todo_text = 2;
+  optional int64 created_at = 3;
+  enum Status{
+    INPROGRESS = 0;
+    COMPLETED = 1;
+    CREATED = 2;
+  };
+  optional Status status = 4;
+}
+
+message GetTodoId{
+  required int32 id = 1;
+}
+
+message Todos{
+  repeated Todo todos = 1;
+}
+
+message EmptyRequest{
+
+}
+
+  
