@@ -36,17 +36,21 @@ class TodoServiceServicer(TodoServiceServicer):
     def CreateTodo(self, request, context):
         # todo_response = Todo()
         try:
-            print(request, dir(Todo))
-            todo = Todo(id=request.id,
-                        todo_text=request.todo_text)
-            # print("asdasdadadweewe",**todo.asdict())
-            session.add(todo)
-            session.commit()
-            todo_response = todo.asdict()
-            # import pdb;
-            # pdb.set_trace()
-            # print(todo)
-            return todo_pb2.Todo(**todo_response)
+            if request.todo_text:
+
+                print(request, dir(Todo))
+                todo = Todo(
+                            todo_text=request.todo_text)
+                # print("asdasdadadweewe",**todo.asdict())
+                session.add(todo)
+                session.commit()
+                todo_response = todo.asdict()
+                # import pdb;
+                # pdb.set_trace()
+                # print(todo)
+                return todo_pb2.Todo(**todo_response)
+            else:
+                raise ValueError("todo text must be present")
         except Exception as e:
             print("Exception occured,{0}".format(e.__str__()))
             return Todo()
@@ -57,6 +61,8 @@ class TodoServiceServicer(TodoServiceServicer):
         print("Inside GetAllTodos")
         todos = []
         try:
+            if not request.id:
+                raise ValueError("id must be present")
             todos = session.query(Todo).all()
             todos_response = []
             for todo in todos:
@@ -71,6 +77,8 @@ class TodoServiceServicer(TodoServiceServicer):
     def GetTodo(self, request, context):
         print("Inside get todo")
         try:
+            if not request.id:
+                raise ValueError("id must be present")
             todo = session.query(Todo).get(request.id)
             return todo_pb2.Todo(**todo.asdict())
         except Exception as e:
@@ -81,6 +89,8 @@ class TodoServiceServicer(TodoServiceServicer):
     def UpdateTodo(self, request, context):
 
         try:
+            if not request.id:
+                raise ValueError("id must be present")
             todo = session.query(Todo).filter(
                 Todo.id == request.id).update({'status': request.status})
             session.commit()

@@ -31,7 +31,7 @@ class TodoServiceStub(object):
         )
     self.GetTodo = channel.unary_unary(
         '/TodoService/GetTodo',
-        request_serializer=todo__pb2.GetTodoId.SerializeToString,
+        request_serializer=todo__pb2.Todo.SerializeToString,
         response_deserializer=todo__pb2.Todo.FromString,
         )
 
@@ -88,7 +88,7 @@ def add_TodoServiceServicer_to_server(servicer, server):
       ),
       'GetTodo': grpc.unary_unary_rpc_method_handler(
           servicer.GetTodo,
-          request_deserializer=todo__pb2.GetTodoId.FromString,
+          request_deserializer=todo__pb2.Todo.FromString,
           response_serializer=todo__pb2.Todo.SerializeToString,
       ),
   }
