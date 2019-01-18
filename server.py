@@ -37,17 +37,11 @@ class TodoServiceServicer(TodoServiceServicer):
         # todo_response = Todo()
         try:
             if request.todo_text:
-
-                print(request, dir(Todo))
                 todo = Todo(
                             todo_text=request.todo_text)
-                # print("asdasdadadweewe",**todo.asdict())
                 session.add(todo)
                 session.commit()
                 todo_response = todo.asdict()
-                # import pdb;
-                # pdb.set_trace()
-                # print(todo)
                 return todo_pb2.Todo(**todo_response)
             else:
                 raise ValueError("todo text must be present")
@@ -57,12 +51,8 @@ class TodoServiceServicer(TodoServiceServicer):
 
     @log_request
     def GetAllTodos(self, request, context):
-        # todo_response = Todo()
-        print("Inside GetAllTodos")
         todos = []
         try:
-            if not request.id:
-                raise ValueError("id must be present")
             todos = session.query(Todo).all()
             todos_response = []
             for todo in todos:
@@ -75,7 +65,6 @@ class TodoServiceServicer(TodoServiceServicer):
 
     @log_request
     def GetTodo(self, request, context):
-        print("Inside get todo")
         try:
             if not request.id:
                 raise ValueError("id must be present")

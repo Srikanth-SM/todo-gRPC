@@ -13,7 +13,7 @@ class Todo(Base):
     
     __tablename__ = "todos"
     id = Column('id',Integer, primary_key=True)
-    todo_text = Column('todo_text',String(100), unique=True, nullable=False)
+    todo_text = Column('todo_text',String(100), nullable=False)
     # created_at = Column('created_at',DateTime,default=datetime.datetime.now())
     status = Column(Integer, nullable=False,default=0)
 
